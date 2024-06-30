@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./form.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 const yup = require("yup");
 
-function Form({ mode, changeMode }) {
+function Form({ mode }) {
+  const navigate = useNavigate();
   const [errMess, setErrMess] = useState("");
   const notify = (mess, obj) => toast(mess, obj);
   async function handleClick(e) {
@@ -49,7 +51,7 @@ function Form({ mode, changeMode }) {
         password.value = "";
         changeMode("login");
       } else {
-        window.location.href = "/";
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -65,6 +67,9 @@ function Form({ mode, changeMode }) {
       });
       setErrMess("Account information is not correct");
     }
+  }
+  function changeMode(mode) {
+    navigate(`/${mode}`);
   }
   return (
     mode && (
