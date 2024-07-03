@@ -3,14 +3,15 @@ import "./form.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { userInfoSlice } from "../../redux/reducers/userInfoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/reducers/userInfoSlice";
 
 const yup = require("yup");
 
 function Form({ mode }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [errMess, setErrMess] = useState("");
   const notify = (mess, obj) => toast(mess, obj);
   async function handleClick(e) {
@@ -32,20 +33,14 @@ function Form({ mode }) {
         mode !== "login" &&
         yup.string().test((value) => value === password.value),
     });
-    const url = mode === "login" ? "login" : "register";
+    // const url = mode === "login" ? "login" : "register";
     try {
       const dataValidated = await yupObject.validate(data);
       console.log(dataValidated);
-      const res = await fetch(`http://localhost:8080/${url}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataValidated),
-      });
-      const message = await res.json();
-      if (message.message) {
-        alert(`${message.message}`);
+      dispatch(login(dataValidated));
+      // const message = await res.json();
+      if (user.message) {
+        alert(`${user.message}`);
         return;
       }
       notify("Success!");
@@ -55,7 +50,7 @@ function Form({ mode }) {
         password.value = "";
         changeMode("login");
       } else {
-        dispatch(userInfoSlice.actions.login(message));
+        // dispatch(userInfoSlice.actions.login(message));
         navigate("/");
       }
     } catch (error) {
