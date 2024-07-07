@@ -1,20 +1,22 @@
 import { useSelector } from "react-redux";
 import "./homepage.scss";
 import TodoList from "../components/TodoList";
-import ReactLoading from "react-loading";
+import Chat from "../components/Chat";
+// import ReactLoading from "react-loading";
 
 function HomePage() {
   const user = useSelector(({ user }) => user);
-  const todoList = useSelector((state) => state.todoList);
+  const modePage = useSelector(({ modePage }) => modePage);
+  // const todoList = useSelector((state) => state.todoList);
 
   return (
     <div>
       {user.token ? (
         <>
-          <TodoList />
-          {todoList.loading && (
+          {modePage === "todo" ? <TodoList /> : <Chat />}
+          {/* {todoList.loading && (
             <ReactLoading delay={2000} height={"20%"} width={"20%"} />
-          )}
+          )} */}
         </>
       ) : (
         <></>

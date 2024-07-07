@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userInfoSlice } from "../../redux/reducers/userInfoSlice";
+import { modePageSlice } from "../../redux/reducers/pageSlice";
 
 function Header() {
   const navigate = useNavigate();
@@ -12,6 +13,9 @@ function Header() {
     dispatch(userInfoSlice.actions.logout());
     navigate("/");
   }
+  function changePage(mode) {
+    dispatch(modePageSlice.actions.changePage(mode));
+  }
   function changeMode(mode) {
     navigate(`/${mode}`);
   }
@@ -19,6 +23,12 @@ function Header() {
     <div className="header">
       {user.token ? (
         <div className="button-header">
+          <button className="chat-btn" onClick={() => changePage("chat")}>
+            Chat
+          </button>
+          <button className="todo-btn" onClick={() => changePage("todo")}>
+            Todo
+          </button>
           <button className="logout-btn" onClick={() => logout()}>
             Logout
           </button>

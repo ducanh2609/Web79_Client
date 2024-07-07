@@ -20,6 +20,7 @@ function Form({ mode }) {
     const data = {
       username: username.value,
       password: password.value,
+      mode,
     };
     if (mode !== "login") {
       data.email = email.value;

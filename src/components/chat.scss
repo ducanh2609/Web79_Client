@@ -1,0 +1,83 @@
+.chat-page {
+    background-color: white;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 15px rgb(81, 81, 81);
+    border-radius: 10px;
+    padding: 20px;
+    overflow: auto;
+
+    .chat-line {
+        height: 400px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: inset 2px 2px 3px rgb(113, 113, 113), inset -2px 2px 3px black, inset 2px -2px 3px black;
+
+        >div {
+            display: flex;
+            margin-bottom: 10px;
+            color: white;
+
+            >div {
+                width: max-content;
+                max-width: 60%;
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            .your-mess {
+                background-color: rgb(16, 115, 254);
+            }
+
+            .other-mess {
+                background-color: rgb(127, 127, 127);
+            }
+        }
+
+        .your-box {
+            justify-content: flex-end;
+        }
+
+
+    }
+
+    .typing {
+        font-size: 10px;
+        margin-bottom: 5px;
+        min-height: 14px;
+    }
+
+    .chat-input {
+        display: flex;
+
+        input {
+            height: 30px;
+            width: 90%;
+            margin-right: 20px;
+            padding: 0 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(176, 176, 176);
+            border-radius: 3px;
+
+            &:focus {
+                background-color: aquamarine;
+                box-shadow: inset 1px 1px 3px rgb(107, 107, 107), inset -1px 1px 3px rgb(196, 255, 235), inset 1px -1px 3px rgb(196, 255, 235);
+                ;
+            }
+        }
+
+        button {
+            flex: 1;
+            background-color: rgb(10, 157, 255);
+            border: none;
+            border-radius: 3px;
+            color: wheat;
+
+            &:hover {
+                opacity: 0.8;
+                cursor: pointer;
+            }
+        }
+    }
+}

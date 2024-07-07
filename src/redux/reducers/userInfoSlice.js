@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const login = createAsyncThunk('users/login', async (data) => {
-    const res = await fetch(`http://localhost:8080/login`, {
+    const res = await fetch(`http://localhost:8080/${data.mode}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
